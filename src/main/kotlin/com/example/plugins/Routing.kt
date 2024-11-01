@@ -13,7 +13,7 @@ fun Application.configureRouting() {
         static("/static") {
             resources("static")
         }
-        // Главная страница - выводим HTML файл index.html
+        // Главная страница - выводим HTML файл
         get("/") {
             call.respond(ThymeleafContent("main", emptyMap()))
         }
