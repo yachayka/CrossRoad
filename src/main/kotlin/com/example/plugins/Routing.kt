@@ -15,7 +15,7 @@ fun Application.configureRouting() {
         }
         // Главная страница - выводим HTML файл
         get("/") {
-            call.respond(ThymeleafContent("main", emptyMap()))
+            call.respond(ThymeleafContent("index", emptyMap()))
         }
         // Пример маршрута для отображения HTML файла
         get("/example") {
