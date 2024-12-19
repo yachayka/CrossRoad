@@ -1,10 +1,10 @@
 package com.example
 
-import com.example.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
+import io.ktor.utils.io.*
 import kotlin.test.*
 
 class ApplicationTest {
@@ -18,7 +18,7 @@ class ApplicationTest {
             assertEquals("Hello World!", bodyAsText())
         }
     }
-/*
+
     @Test
     fun testGetSomeResource() = testApplication {
         application {
@@ -31,6 +31,7 @@ class ApplicationTest {
         }
     }
 
+    @OptIn(InternalAPI::class)
     @Test
     fun testPostResource() = testApplication {
         application {
@@ -45,6 +46,11 @@ class ApplicationTest {
         }
     }
 
+    private fun configureRouting() {
+        TODO("Not yet implemented")
+    }
+
+    @OptIn(InternalAPI::class)
     @Test
     fun testPutResource() = testApplication {
         application {
@@ -68,5 +74,5 @@ class ApplicationTest {
             assertEquals(HttpStatusCode.NoContent, status)
         }
     }
-    */
+
 }
