@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация нового пользователя</title>
+    <link rel="stylesheet" href="css/reg.css"> <!-- Подключение CSS файла -->
+</head>
+
+<body>
+
+    <header>
+        <div class="container header-content">
+            <h1 class="logo">Перекресток.doc</h1>
+            <nav class="main-nav">
+                <a href="../static/index.html" class="nav-item">Главная</a>
+                <a href="../static/stati.html" class="nav-item">Статьи</a>
+                <a href="../static/disc.html" class="nav-item">Обсуждения</a>
+                <a href="../static/we.html" class="nav-item">Сообщество</a>
+                <a href="../static/enter.html" class="nav-item login-btn">Вход</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="register-container">
+            <h2>Регистрация нового пользователя</h2>
+            <form>
+                <div>
+                    <input type="text" placeholder="Имя" required>
+                </div>
+                <div>
+                    <input type="email" placeholder="Электронная почта" required>
+                </div>
+                <div>
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <div>
+                    <input type="password" placeholder="Повторите пароль" required>
+                </div>
+                <button type="submit" class="register-btn">Зарегистрироваться</button>
+            </form>
+            <p>Уже есть аккаунт? <a href="../static/enter.html" class="login-link">Войти!</a></p>
+        </div>
+    </div>
+
+</body>
+
+</html>
