@@ -1,60 +1,51 @@
-
-val kotlin_version: String by project
-val logback_version: String by project
-
 plugins {
-    kotlin("jvm") version "2.0.21" // Используем актуальную версию Kotlin
-    id("io.ktor.plugin") version "3.0.0" // Плагин для Ktor
-    id("org.jetbrains.dokka") version "1.8.10" // Для генерации документации
-}
+    // Apply the Kotlin plugin
+    kotlin("jvm") version "1.8.0" // Ensure you're using the correct Kotlin version
 
-group = "com.example"
-version = "0.0.1"
-
-application {
-    mainClass.set("io.ktor.server.netty.EngineMain") // Основной класс для запуска приложения
-    val isDevelopment: Boolean = project.ext.has("development")
-    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
+    // Apply the application plugin for JVM-based applications
+    application
 }
 
 repositories {
-    mavenCentral() // Подключаем центральный репозиторий Maven
+    mavenCentral() // Standard repository
+    gradlePluginPortal() // Ensure access to Gradle plugins
 }
 
 dependencies {
-    // Основные зависимости для Ktor
-    implementation("io.ktor:ktor-server-core-jvm:2.3.0") // Основной серверный модуль
-    implementation("io.ktor:ktor-server-netty-jvm:2.3.0") // Сервер с поддержкой Netty
-    implementation("io.ktor:ktor-server-html-builder:2.3.0") // Для работы с HTML-шаблонами
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.0") // Сериализация JSON
-    implementation("io.ktor:ktor-server-content-negotiation:2.3.0") // Для Content Negotiation
+    // Ktor server core dependencies
+    implementation("io.ktor:ktor-server-core:2.3.0") // Ktor core
+    implementation("io.ktor:ktor-server-netty:2.3.0") // Netty engine (you can replace it with another engine if needed)
 
-    // Логирование
-    implementation("io.ktor:ktor-server-call-logging:2.3.0") // Логирование запросов
+    // Kotlin standard library
+    implementation(kotlin("stdlib"))
 
-    // Для обработки ошибок
-    implementation("io.ktor:ktor-server-status-pages:2.3.0") // Статусы ошибок
+    // For JSON handling, you'll need serialization (optional, based on your needs)
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.0")
 
-    // Для сессий
-    implementation("io.ktor:ktor-server-sessions:2.3.0") // Поддержка сессий
+    // Database dependencies (ex. Exposed for SQL or H2 for a simple DB, adjust as needed)
+    implementation("org.jetbrains.exposed:exposed-core:0.40.0")
+    implementation("org.jetbrains.exposed:exposed-dao:0.40.0")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.40.0")
 
-    // Для тестирования
-    testImplementation("io.ktor:ktor-server-test-host-jvm:2.3.0") // Для тестирования сервера
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version") // Для работы с тестами через JUnit
+    // For database connection pooling (optional)
+    implementation("org.apache.commons:commons-dbcp2:2.9.0")
 
-    // Логирование (logback)
-    implementation("ch.qos.logback:logback-classic:$logback_version") // Логирование с помощью Logback
-    // Для работы с HTML-шаблонами
-    implementation("io.ktor:ktor-server-html-builder:2.3.0")
+    // For testing dependencies
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.8.0") // Use Kotlin's test library
+    testImplementation("io.ktor:ktor-server-tests:2.3.0") // Ktor testing utilities
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform() // Make sure to use JUnit 5
+}
 
+application {
+    mainClass.set("io.ktor.server.netty.EngineMain") // Main entry for Ktor applications using Netty
+}
 
-
-
-
-
-
-
-
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(17)) // Ensure you're using a compatible Java version (17 or later for Ktor 2.x)
+    }
+}
 
